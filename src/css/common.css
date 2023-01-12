@@ -16,3 +16,25 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  padding: 5px 10px;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: 0 solid;
+  box-shadow: 0px 0px 1px 0px gray;
+  cursor: pointer;
+}
+
+.btnOff {
+  background-color: #aaa;
+  color: #555;
+  cursor: default;
+}
