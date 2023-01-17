@@ -2,6 +2,7 @@
 import flatpickr from "flatpickr";
 // Dodatkowy import stylów
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const inputBtn = document.querySelector("[data-start]");
 const timeDays = document.querySelector("[data-days]");
@@ -42,7 +43,7 @@ const options = {
       chosedDate = selectedDates[0];
       timeLeft = chosedDate.getTime() - new Date().getTime()
       if (timeLeft < 0) {
-          window.alert("Please choose a date in the future");
+          Notiflix.Notify.failure('Please choose a date in the future');
           inputBtn.classList.add("btnOff");
           inputBtn.removeEventListener("click", timer);
           clearInterval(dataTimer);
@@ -53,15 +54,21 @@ const options = {
   },
 };
 
+const addLeadingZero = (value) => {
+    return String(value).padStart(2, "0");
+}
+
+const timerFunction = () => {
+    timeLeft = chosedDate.getTime() - new Date().getTime();
+    if (timeLeft <= 1000) clearInterval(dataTimer);
+    timeDays.textContent = addLeadingZero(convertMs(timeLeft).days);
+    timeHours.textContent = addLeadingZero(convertMs(timeLeft).hours);
+    timeMinutes.textContent = addLeadingZero(convertMs(timeLeft).minutes);
+    timeSeconds.textContent = addLeadingZero(convertMs(timeLeft).seconds);
+}
+
 const timer = () => {
-    const timerFunction = () => {
-        timeLeft = chosedDate.getTime() - new Date().getTime();
-        timeDays.textContent = convertMs(timeLeft).days;
-        timeHours.textContent = convertMs(timeLeft).hours;
-        timeMinutes.textContent = convertMs(timeLeft).minutes;
-        timeSeconds.textContent = convertMs(timeLeft).seconds;
-        if (convertMs(timeLeft).seconds == 0) clearInterval(dataTimer);
-    }
+    Notiflix.Notify.success('Counting down has been started');
     timerFunction();
     dataTimer = setInterval(timerFunction, 1000);
 }

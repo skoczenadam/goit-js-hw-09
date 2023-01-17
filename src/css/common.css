@@ -38,3 +38,25 @@ button {
   color: #555;
   cursor: default;
 }
+
+.timer {
+  display: flex;
+}
+
+.field {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60px;
+  justify-content: space-around;
+}
+
+.value {
+  text-align: center;
+  font-size: 30px;
+}
+
+.label {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+}
