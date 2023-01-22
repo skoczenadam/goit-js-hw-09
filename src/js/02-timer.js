@@ -43,11 +43,12 @@ const options = {
       chosedDate = selectedDates[0];
       timeLeft = chosedDate.getTime() - new Date().getTime()
       if (timeLeft < 0) {
+          clearInterval(dataTimer);
           Notiflix.Notify.failure('Please choose a date in the future');
           inputBtn.classList.add("btnOff");
           inputBtn.removeEventListener("click", timer);
-          clearInterval(dataTimer);
       } else {
+          clearInterval(dataTimer);
           inputBtn.classList.remove("btnOff");
           inputBtn.addEventListener("click", timer);
       }
