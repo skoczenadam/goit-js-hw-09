@@ -84,8 +84,7 @@ const addPictures = images.map(element => {
   gallery.insertAdjacentHTML("beforeend", image);
 });
 
-const lightbox = new SimpleLightbox(`.gallery a`);
-
-lightbox.on('show.simplelightbox', function (e) {
-  console.log(e.explicitOriginalTarget.alt);
-})
+const lightbox = new SimpleLightbox(`.gallery a`, {
+  captionType: "alt",
+  sourceAttr: "href",
+});
