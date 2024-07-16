@@ -78,6 +78,7 @@ const addPictures = images.map(element => {
         class="gallery-image"
         src="${element.preview}"
         alt="${element.description}"
+        title="${element.description}"
       />
     </a>
   </li>`;
@@ -85,6 +86,5 @@ const addPictures = images.map(element => {
 });
 
 const lightbox = new SimpleLightbox(`.gallery a`, {
-  captionType: "alt",
-  sourceAttr: "href",
+  captionDelay: 250
 });
