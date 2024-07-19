@@ -2,28 +2,37 @@ const form = document.querySelector("form");
 
 const user = {
   email: "",
-  text: "",
+  message: "",
 };
 
-// localStorage.getItem("feedback-form-state", )
+const savedUser = localStorage.getItem("feedback-form-state");
+const parsedUser = JSON.parse(savedUser);
 
-// form.addEventListener("input", e => {
+if (parsedUser) {
+  form.email.value = parsedUser.email;
+  form.message.value = parsedUser.message;
+}
 
-//   localStorage.setItem("feedback-form-state", )
-// })
+form.addEventListener("input", e => {
+  const email = e.currentTarget.email.value;
+  const message = e.currentTarget.message.value;
+  user.email = email.trim();
+  user.message = message.trim();
+  localStorage.setItem("feedback-form-state", JSON.stringify(user));
+})
 
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  const form = event.target;
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const form = e.target;
   const email = form.elements.email.value;
-  const text = form.elements.text.value;
-
-  if (email === "" || text === "") {
+  const message = form.elements.message.value;
+  if (email === "" || message === "") {
     alert("All form fields must be filled in")
   } else {
-    user.email = email.trim();
-    user.password = text.trim();
-    console.log(user);
-    form.reset();
-  };
+  user.email = email.trim();
+  user.message = message.trim();
+  form.reset();
+  localStorage.removeItem("feedback-form-state");
+  console.log(user);
+  }
 })
